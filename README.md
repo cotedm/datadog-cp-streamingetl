@@ -4,35 +4,44 @@ Based on the [Streaming ETL Pipline example|https://docs.ksqldb.io/en/latest/tut
 
 To use:
 
-#. Clone the repository
+## Pull in the necessary connectors from Confluent Hub
+```
+mkdir confluent-hub-components
+confluent-hub install --component-dir confluent-hub-components --no-prompt debezium/debezium-connector-postgresql:1.1.0
+confluent-hub install --component-dir confluent-hub-components --no-prompt debezium/debezium-connector-mongodb:1.1.0
+confluent-hub install --component-dir confluent-hub-components --no-prompt confluentinc/kafka-connect-elasticsearch:5.5.0
+```
 
-#. Pull in the necessary connectors from Confluent Hub
-	mkdir confluent-hub-components
-	confluent-hub install --component-dir confluent-hub-components --no-prompt debezium/debezium-connector-postgresql:1.1.0
-	confluent-hub install --component-dir confluent-hub-components --no-prompt debezium/debezium-connector-mongodb:1.1.0
-	confluent-hub install --component-dir confluent-hub-components --no-prompt confluentinc/kafka-connect-elasticsearch:5.5.0
+## Start services
+```
+docker-compose up -d
+```
 
-#. Start services
-	docker-compose up -d
+## Setup Postgres
+```
+./setup_postgres.sh
+./populate_postgres.sh (this will generate a continuous load on postgres)
+```
 
-#. Setup Postgres
-	./setup_postgres.sh
-	./populate_postgres.sh (this will generate a continuous load on postgres)
+## Setup Mongo
+```
+./setup_mongo.sh
+/etc/setup.sh (from inside Mongo container)
+exit
+```
 
-#. Setup Mongo
-	./setup_mongo.sh
-	/etc/setup.sh (from inside Mongo container)
-	exit
+## Start stream processing
+```
+docker exec -it ksqldb-cli ksql http://ksqldb-server:8088
+run each command in connectors_streams.ksql at the above command line
+```
 
-#. Start stream processing
-	docker exec -it ksqldb-cli ksql http://ksqldb-server:8088
-	run each command in connectors_streams.ksql at the above command line
+## See results in Elasticsearch
+```
+./es_shipped_orders.sh
+```
+## Import Datadog Dashboard
+File to import called StreamingETLDashboard.json
 
-#. See results in Elasticsearch
-	./es_shipped_orders.sh
-
-#. Import Datadog Dashboard
-	File to import called StreamingETLDashboard.json
-
-#. Take a look around Control Center
-	navigate to http://localhost:9021 in a browser
+## Take a look around Control Center
+navigate to http://localhost:9021 in a browser
