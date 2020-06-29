@@ -2,14 +2,13 @@ A demo of the Confluent Platform integrating with Datadog.
 
 Based on the [Streaming ETL Pipline example](https://docs.ksqldb.io/en/latest/tutorials/etl/?_ga=2.210782677.1703750526.1591788966-2099790183.1588796881&_gac=1.262933374.1589825156.CjwKCAjw5Ij2BRBdEiwA0Frc9WH4ZGyvm0jy0emMIPMzUxhzno2eY1_EVrOosKsa5zJdXh6HdloEXBoCeXIQAvD_BwE)
 
-To use:
+## Prerequisite
+[Confluent Hub Client](https://docs.confluent.io/current/connect/managing/confluent-hub/client.html) is installed.
+Docker is installed and running with 8GB of RAM allocated.
 
 ## Pull in the necessary connectors from Confluent Hub
 ```
-mkdir confluent-hub-components
-confluent-hub install --component-dir confluent-hub-components --no-prompt debezium/debezium-connector-postgresql:1.1.0
-confluent-hub install --component-dir confluent-hub-components --no-prompt debezium/debezium-connector-mongodb:1.1.0
-confluent-hub install --component-dir confluent-hub-components --no-prompt confluentinc/kafka-connect-elasticsearch:5.5.0
+./download_connectors.sh
 ```
 
 ## Start services
@@ -33,7 +32,8 @@ exit
 ## Start stream processing
 ```
 docker exec -it ksqldb-cli ksql http://ksqldb-server:8088
-run each command in connectors_streams.ksql at the above command line
+run script '/etc/connectors_streams.ksql'
+exit
 ```
 
 ## See results in Elasticsearch
