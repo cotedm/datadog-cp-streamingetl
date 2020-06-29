@@ -1,6 +1,6 @@
 A demo of the Confluent Platform integrating with Datadog.
 
-Based on the [Streaming ETL Pipline example|https://docs.ksqldb.io/en/latest/tutorials/etl/?_ga=2.210782677.1703750526.1591788966-2099790183.1588796881&_gac=1.262933374.1589825156.CjwKCAjw5Ij2BRBdEiwA0Frc9WH4ZGyvm0jy0emMIPMzUxhzno2eY1_EVrOosKsa5zJdXh6HdloEXBoCeXIQAvD_BwE]
+Based on the [Streaming ETL Pipline example](https://docs.ksqldb.io/en/latest/tutorials/etl/?_ga=2.210782677.1703750526.1591788966-2099790183.1588796881&_gac=1.262933374.1589825156.CjwKCAjw5Ij2BRBdEiwA0Frc9WH4ZGyvm0jy0emMIPMzUxhzno2eY1_EVrOosKsa5zJdXh6HdloEXBoCeXIQAvD_BwE)
 
 To use:
 
